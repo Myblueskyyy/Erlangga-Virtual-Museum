@@ -35,14 +35,7 @@ jobs:
             cd games/${{ secrets.DIRECTORY_PATH_STAGING }}
             git pull origin main
 
-            PID=$(lsof -t -i:7001)
-            if [ ! -z "$PID" ]; then
-              kill -9 $PID
-              echo "Previous process on port 7001 killed"
-            fi
-
-            # Start static HTML server
-            nohup http-server -p 7001 > server.log 2>&1 &
-            echo "Server started on port 7001"
+            pm2 restart ${{ secrets.DIRECTORY_PATH_STAGING }}
+            pm2 save
 
           EOF
