@@ -32,7 +32,7 @@ jobs:
         run: |
           sshpass -p "${{ secrets.GCP_PASSWORD_STAGING }}" ssh -o StrictHostKeyChecking=no ${{ secrets.GCP_USER_STAGING }} << 'EOF'
 
-            cd ${{ secrets.DIRECTORY_PATH_STAGING }}
+            cd games/${{ secrets.DIRECTORY_PATH_STAGING }}
             git pull origin main
 
             PID=\$(lsof -t -i:7001)
