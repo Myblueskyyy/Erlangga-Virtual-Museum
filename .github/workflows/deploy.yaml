@@ -31,7 +31,9 @@ jobs:
       - name: Deploy to GCP
         run: |
           sshpass -p "${{ secrets.GCP_PASSWORD_STAGING }}" ssh -o StrictHostKeyChecking=no ${{ secrets.GCP_USER_STAGING }} << 'EOF'
-
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Ini memuat nvm
+            
             cd games/${{ secrets.DIRECTORY_PATH_STAGING }}
             git pull origin main
 
